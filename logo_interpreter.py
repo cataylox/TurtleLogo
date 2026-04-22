@@ -109,7 +109,7 @@ _TOKEN_RE = re.compile(
     r'|(?P<RBRACK>\])'
     r'|(?P<LPAREN>\()'
     r'|(?P<RPAREN>\))'
-    r'|(?P<WORD>"[^ \t\r\n\[\]()]*)'
+    r'|(?P<WORD>"[^ \t\r\n\[\]()"]*)'
     r'|(?P<VAR>:[A-Za-z_][A-Za-z0-9_.]*)'
     r'|(?P<NUMBER>-?\d+\.?\d*(?:[eE][+-]?\d+)?)'
     r'|(?P<OP><=|>=|<>|[+\-*/=<>])'
@@ -603,12 +603,29 @@ class LogoInterpreter:
           integer 0-255   -> LOGO_PALETTE entry
           string "red     -> passed straight to Tk (named colour)
           list [r g b]    -> r/g/b each 0-255
+
+        Raises LogoError on unrecognised colour names so the error is
+        reported in the console rather than crashing Tkinter.
         """
         if isinstance(val, (int, float)):
             idx = int(val) % 256          # wrap so e.g. 256 -> 0
             return LOGO_PALETTE[idx]
         if isinstance(val, str):
-            return val.lower()
+            # Strip accidental surrounding quotes/whitespace (e.g. "black")
+            color = val.strip().strip('"').lower()
+            if not color:
+                return '#000000'
+            # Validate: either #rrggbb hex or a known X11/Tk colour name.
+            if re.fullmatch(r'#[0-9a-fA-F]{6}', color):
+                return color
+            # Allow any word that looks like a plain name (letters/hyphens).
+            # Tk will raise an error for truly unknown names; we convert that
+            # into a friendly LogoError here by checking against a broad set.
+            if not re.fullmatch(r'[a-z][a-z0-9 ]*', color):
+                raise LogoError(
+                    f"SETPENCOLOR: invalid colour {val!r} "
+                    f"(use a number 0-255, a name like \"red, or [r g b])")
+            return color
         if isinstance(val, list):
             items = self._list_items(val)
             if len(items) >= 3:

@@ -800,7 +800,14 @@ REPEAT 3 [KOCH 280 4  RIGHT 120]
                 elif item[0] == '__PRINT__':
                     self._console.write(item[1])
                 else:
-                    self._canvas.handle(*item)
+                    try:
+                        self._canvas.handle(*item)
+                    except tk.TclError as e:
+                        # Tkinter rejected a value (e.g. unknown colour name).
+                        # Stop execution and show a friendly message in the
+                        # console instead of crashing the callback chain.
+                        self._interp.stop()
+                        self._on_exec_done(f"Display error: {e}")
         except queue.Empty:
             pass
         self.after(16, self._process_queue)  # ~60 fps
