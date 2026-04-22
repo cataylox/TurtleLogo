@@ -137,6 +137,10 @@ Colours can be specified three ways:
 
 2. **Named colour** — any Tk/X11 colour name: `"red`, `"dodgerblue`, `"coral`, etc.
 
+   > **Note:** Logo uses a *leading* quote only — `"red` not `"red"`.  
+   > The interpreter accepts trailing quotes and strips them automatically, but it is best practice to omit them.  
+   > An unrecognised colour name (e.g. `"banana`) will stop execution and print an error in the console instead of crashing.
+
 3. **RGB list** — `[r g b]` where each component is 0–255: `SETPENCOLOR [255 128 0]`
 
 Examples:
@@ -190,6 +194,10 @@ FOREVER [ block ]      ; runs until STOP or the Stop button
 ### Arithmetic & Math
 
 Infix operators (spaces required): `+  -  *  /  =  <  >  <=  >=  <>`
+
+> **Operator precedence tip:** A reporter like `SIN` consumes the *next expression* as its argument,
+> which includes any trailing `*` or `/`.  Write `(SIN :x) * 200` — not `SIN :x * 200` — to
+> multiply the result of SIN rather than its argument.
 
 | Reporter | Description |
 |----------|-------------|
@@ -327,6 +335,28 @@ REPEAT 3 [ KOCH 280 4  RIGHT 120 ]
 
 ---
 
+## Example Files
+
+The `examples/` directory contains 13 ready-to-run programs. Open any of them with **File > Open**.
+
+| File | Description |
+|------|-------------|
+| `spiral.logo` | Expanding square spiral with a FOR loop |
+| `snowflake.logo` | Koch snowflake, depth 4 (recursive) |
+| `tree.logo` | Fractal binary tree (recursive branching) |
+| `hilbert.logo` | Hilbert space-filling curve, depth 5 |
+| `rose_of_stars.logo` | 72 overlapping five-pointed stars, all 256 palette colours |
+| `web.logo` | Spider web — 8 spokes and 5 concentric octagonal rings |
+| `sierpinski.logo` | Sierpinski triangle, depth 4 |
+| `rainbow_spiral.logo` | Square spiral cycling through all 256 colours twice |
+| `sunburst.logo` | 72 alternating-length rays with concentric ring overlays |
+| `mandala.logo` | Three rings of ARC-drawn petals plus a centre disc |
+| `lissajous.logo` | Three overlapping Lissajous curves (3:2, 5:4, 7:6 ratios) |
+| `galaxy.logo` | Four logarithmic spiral arms on a black background |
+| `dragon_curve.logo` | Dragon curve fractal via mutual recursion, depth 11 |
+
+---
+
 ## File Format
 
 Logo programs are plain text files. Conventional extensions are `.logo` or `.lgo`. Files are UTF-8 encoded.
@@ -345,7 +375,16 @@ turtle/
     ├── spiral.logo
     ├── snowflake.logo
     ├── tree.logo
-    └── hilbert.logo
+    ├── hilbert.logo
+    ├── rose_of_stars.logo
+    ├── web.logo
+    ├── sierpinski.logo
+    ├── rainbow_spiral.logo
+    ├── sunburst.logo
+    ├── mandala.logo
+    ├── lissajous.logo
+    ├── galaxy.logo
+    └── dragon_curve.logo
 ```
 
 ---
