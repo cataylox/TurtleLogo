@@ -1,0 +1,22 @@
+; Recursive Tree
+; ────────────────
+; A binary fractal tree drawn with recursive procedures.
+
+TO TREE :SIZE
+  IF :SIZE < 5 [STOP]
+  FORWARD :SIZE
+  LEFT 30
+  TREE :SIZE * 0.7
+  RIGHT 60
+  TREE :SIZE * 0.7
+  LEFT 30
+  BACKWARD :SIZE
+END
+
+HIDETURTLE
+PENUP
+SETY -160
+PENDOWN
+SETHEADING 0
+SETPENCOLOR "green
+TREE 90

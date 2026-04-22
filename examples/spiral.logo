@@ -1,0 +1,10 @@
+; Square Spiral
+; ──────────────
+; An expanding square spiral using a FOR loop.
+
+HIDETURTLE
+SETPENCOLOR "cyan
+FOR [i 1 100] [
+  FORWARD :i * 2
+  RIGHT 91
+]

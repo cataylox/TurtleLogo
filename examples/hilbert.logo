@@ -1,0 +1,39 @@
+; Hilbert Space-Filling Curve (order 4)
+; ──────────────────────────────────────
+
+TO HILBERT :SIZE :RULE :DEPTH
+  IF :DEPTH = 0 [STOP]
+  IF :RULE = 1 [
+    LEFT 90
+    HILBERT :SIZE 2 :DEPTH - 1
+    FORWARD :SIZE
+    RIGHT 90
+    HILBERT :SIZE 1 :DEPTH - 1
+    FORWARD :SIZE
+    HILBERT :SIZE 1 :DEPTH - 1
+    RIGHT 90
+    FORWARD :SIZE
+    HILBERT :SIZE 2 :DEPTH - 1
+    LEFT 90
+  ]
+  IF :RULE = 2 [
+    RIGHT 90
+    HILBERT :SIZE 1 :DEPTH - 1
+    FORWARD :SIZE
+    LEFT 90
+    HILBERT :SIZE 2 :DEPTH - 1
+    FORWARD :SIZE
+    HILBERT :SIZE 2 :DEPTH - 1
+    LEFT 90
+    FORWARD :SIZE
+    HILBERT :SIZE 1 :DEPTH - 1
+    RIGHT 90
+  ]
+END
+
+HIDETURTLE
+PENUP
+SETXY -120 -120
+PENDOWN
+SETPENCOLOR "purple
+HILBERT 30 1 4

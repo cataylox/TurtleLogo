@@ -1,0 +1,31 @@
+; Koch Snowflake
+; ────────────────
+; Classic fractal curve composed of 3 Koch arcs.
+
+TO KOCH :SIZE :DEPTH
+  IF :DEPTH = 0 [
+    FORWARD :SIZE
+    STOP
+  ]
+  KOCH :SIZE / 3 :DEPTH - 1
+  LEFT 60
+  KOCH :SIZE / 3 :DEPTH - 1
+  RIGHT 120
+  KOCH :SIZE / 3 :DEPTH - 1
+  LEFT 60
+  KOCH :SIZE / 3 :DEPTH - 1
+END
+
+TO SNOWFLAKE :SIZE :DEPTH
+  REPEAT 3 [
+    KOCH :SIZE :DEPTH
+    RIGHT 120
+  ]
+END
+
+HIDETURTLE
+PENUP
+SETXY -140 70
+PENDOWN
+SETPENCOLOR "blue
+SNOWFLAKE 280 4
