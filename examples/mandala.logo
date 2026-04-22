@@ -1,0 +1,52 @@
+; Mandala
+; Three rings of semicircular petals drawn with ARC,
+; plus a central filled disc ring, all in palette colors.
+
+HIDETURTLE
+SETPENSIZE 2
+
+; Inner ring: 12 small petals at radius 45
+MAKE "c 12
+FOR [i 0 11] [
+  SETPENCOLOR :c
+  PENUP
+  HOME
+  SETHEADING :i * 30
+  FORWARD 45
+  PENDOWN
+  ARC 180 20
+  MAKE "c :c + 18
+]
+
+; Middle ring: 12 medium petals at radius 90
+MAKE "c 100
+FOR [i 0 11] [
+  SETPENCOLOR :c
+  PENUP
+  HOME
+  SETHEADING :i * 30 + 15
+  FORWARD 90
+  PENDOWN
+  ARC 180 28
+  MAKE "c :c + 18
+]
+
+; Outer ring: 12 large petals at radius 150
+MAKE "c 200
+FOR [i 0 11] [
+  SETPENCOLOR :c
+  PENUP
+  HOME
+  SETHEADING :i * 30
+  FORWARD 150
+  PENDOWN
+  ARC 180 38
+  MAKE "c :c + 18
+]
+
+; Centre circle
+SETPENCOLOR 14
+PENUP
+HOME
+PENDOWN
+ARC 360 22

@@ -1,0 +1,18 @@
+; Rose of Stars
+; 72 overlapping five-pointed stars, each rotated 5 degrees,
+; cycling through all 256 palette colors to form a star rosette.
+
+HIDETURTLE
+SETPENSIZE 1
+
+FOR [i 0 71] [
+  PENUP
+  HOME
+  SETPENCOLOR REMAINDER :i * 4 256
+  SETHEADING :i * 5
+  PENDOWN
+  REPEAT 5 [
+    FORWARD 200
+    RIGHT 144
+  ]
+]

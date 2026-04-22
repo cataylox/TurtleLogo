@@ -1,0 +1,37 @@
+; Lissajous Curves
+; Parametric figures drawn with SETXY.  Three overlapping
+; curves (3:2, 5:4, and 7:6 frequency ratios) in different
+; colors produce an intricate woven interference pattern.
+;
+; Note: (SIN x) * r wraps SIN in parentheses so the * r
+; scaling is applied AFTER the sine, not inside it.
+
+HIDETURTLE
+SETPENSIZE 1
+
+; Curve 1 - frequency ratio 3:2 (cyan)
+SETPENCOLOR 11
+PENUP
+SETXY (SIN 90) * 200  (SIN 0) * 150
+PENDOWN
+FOR [t 1 360] [
+  SETXY (SIN (:t * 3 + 90)) * 200  (SIN (:t * 2)) * 150
+]
+
+; Curve 2 - frequency ratio 5:4 (yellow), slightly smaller
+SETPENCOLOR 14
+PENUP
+SETXY (SIN 90) * 170  (SIN 0) * 130
+PENDOWN
+FOR [t 1 360] [
+  SETXY (SIN (:t * 5 + 90)) * 170  (SIN (:t * 4)) * 130
+]
+
+; Curve 3 - frequency ratio 7:6 (magenta), smallest
+SETPENCOLOR 13
+PENUP
+SETXY (SIN 90) * 140  (SIN 0) * 110
+PENDOWN
+FOR [t 1 360] [
+  SETXY (SIN (:t * 7 + 90)) * 140  (SIN (:t * 6)) * 110
+]

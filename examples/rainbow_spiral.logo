@@ -1,0 +1,15 @@
+; Rainbow Spiral
+; An expanding square spiral that cycles through all 256
+; palette colors twice. Turning 91 degrees per step (just
+; over a right angle) causes the shape to slowly rotate,
+; filling the canvas with a dense rainbow weave.
+
+HIDETURTLE
+SETPENSIZE 2
+PENDOWN
+
+FOR [i 0 511] [
+  SETPENCOLOR REMAINDER :i 256
+  FORWARD :i / 2
+  RIGHT 91
+]

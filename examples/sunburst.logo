@@ -1,0 +1,37 @@
+; Sunburst
+; 72 radiating rays (alternating long and short) cycling
+; through all palette colors, plus four concentric rings.
+
+HIDETURTLE
+SETPENSIZE 1
+
+; Radial rays from center
+FOR [i 0 71] [
+  PENUP
+  HOME
+  SETHEADING :i * 5
+  SETPENCOLOR REMAINDER :i * 4 256
+  PENDOWN
+  IFELSE (REMAINDER :i 2) = 0 [
+    FORWARD 200
+  ] [
+    FORWARD 130
+  ]
+]
+
+; Concentric rings drawn as 72-sided polygons
+TO RING :r :col
+  SETPENCOLOR :col
+  PENUP
+  SETXY 0 :r
+  PENDOWN
+  FOR [a 1 72] [
+    SETXY :r * SIN (:a * 5)  :r * COS (:a * 5)
+  ]
+  PENUP
+END
+
+RING  50 14
+RING 100 11
+RING 150 12
+RING 200  9

@@ -1,0 +1,39 @@
+; Dragon Curve
+; A self-similar fractal made by repeatedly folding a strip
+; of paper in half.  Uses two mutually-recursive procedures
+; (DRAGON_R turns right, DRAGON_L turns left) to depth 11,
+; producing 2048 segments.  Colors cycle through the palette.
+
+HIDETURTLE
+SETPENSIZE 1
+MAKE "step_count 0
+
+TO DRAGON_R :depth :step
+  IF :depth = 0 [
+    SETPENCOLOR REMAINDER :step_count 256
+    FORWARD :step
+    MAKE "step_count :step_count + 1
+    STOP
+  ]
+  DRAGON_L :depth - 1  :step
+  RIGHT 90
+  DRAGON_R :depth - 1  :step
+END
+
+TO DRAGON_L :depth :step
+  IF :depth = 0 [
+    SETPENCOLOR REMAINDER :step_count 256
+    FORWARD :step
+    MAKE "step_count :step_count + 1
+    STOP
+  ]
+  DRAGON_L :depth - 1  :step
+  LEFT 90
+  DRAGON_R :depth - 1  :step
+END
+
+PENUP
+SETXY -40 60
+PENDOWN
+SETHEADING 90
+DRAGON_R 11 5

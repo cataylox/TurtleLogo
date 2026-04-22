@@ -1,0 +1,24 @@
+; Galaxy
+; Four logarithmic spiral arms offset 90 degrees apart,
+; each shaded with a different palette color range.
+; The spiral equation is: r = t/4, angle = t + offset.
+
+HIDETURTLE
+SETPENSIZE 1
+SETBACKGROUND "black
+
+TO ARM :offset :cstart
+  PENUP
+  HOME
+  PENDOWN
+  FOR [t 1 720] [
+    SETPENCOLOR REMAINDER :cstart + :t / 3 256
+    SETXY :t / 4 * SIN (:t + :offset)  :t / 4 * COS (:t + :offset)
+  ]
+  PENUP
+END
+
+ARM   0  20
+ARM  90 150
+ARM 180  90
+ARM 270 220

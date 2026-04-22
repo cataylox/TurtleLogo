@@ -1,0 +1,33 @@
+; Sierpinski Triangle
+; A classic recursive fractal drawn to depth 4.
+; Each sub-triangle is exactly half the size of its parent.
+
+HIDETURTLE
+SETPENSIZE 1
+SETPENCOLOR 10
+
+TO SIERPINSKI :size :depth
+  IF :depth = 0 [
+    REPEAT 3 [ FORWARD :size  RIGHT 120 ]
+    STOP
+  ]
+  SIERPINSKI :size / 2  :depth - 1
+  FORWARD :size / 2
+  SIERPINSKI :size / 2  :depth - 1
+  BACKWARD :size / 2
+  RIGHT 60
+  FORWARD :size / 2
+  LEFT 60
+  SIERPINSKI :size / 2  :depth - 1
+  RIGHT 60
+  BACKWARD :size / 2
+  LEFT 60
+END
+
+; Position turtle so the triangle is centered on the canvas.
+; For size=220 heading north: centroid offset is (-64, -110).
+PENUP
+SETXY -64 -110
+SETHEADING 0
+PENDOWN
+SIERPINSKI 220 4
