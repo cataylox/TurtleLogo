@@ -61,7 +61,7 @@ KEYWORDS_OUTPUT  = {'PRINT', 'PR', 'SHOW', 'TYPE', 'NEWLINE'}
 class TurtleCanvas(tk.Canvas):
     """Canvas that draws Logo turtle graphics."""
 
-    TURTLE_SIZE = 12
+    TURTLE_SIZE = 13
 
     def __init__(self, parent, **kw):
         kw.setdefault('bg', 'white')
