@@ -12,6 +12,7 @@ A Logo language interpreter and graphical development environment for Ubuntu Lin
 |---|---|
 | Python 3.8+ | Standard on Ubuntu 20.04+ |
 | `python3-tk` | `sudo apt install python3-tk` |
+| `Pillow` | `pip install Pillow` — required for **Save Canvas as PNG** |
 
 ---
 
@@ -39,6 +40,11 @@ python3 logo_ide.py
 |  [ File ]  [ Edit ]  [ Run ]  [ Examples ]  [ Help ]        |
 |  New  Open  Save  |  [ Run ]  [ Stop ]  Clear Canvas  Speed |
 +---------------------------+----------------------------------+
+```
+
+**File menu** includes **Save Canvas as PNG…** (`Ctrl+Shift+P`) — exports the current canvas drawing as a PNG image file.
+
+```
 |  Editor                   |  Canvas                          |
 |  (syntax highlighting,    |  (600x600 Logo coordinate space) |
 |   line numbers, undo/redo)|                                  |
@@ -59,6 +65,7 @@ python3 logo_ide.py
 | `Ctrl+O` | Open file |
 | `Ctrl+S` | Save file |
 | `Ctrl+Z` | Undo |
+| `Ctrl+Shift+P` | Save canvas as PNG |
 
 **Speed slider** — drag right to slow down execution and watch the turtle draw step by step.
 
@@ -297,6 +304,7 @@ FOR [i 1 80] [
 ```
 
 ### Recursive Tree
+![📷 Tree.png](Tree.png)
 ```logo
 TO TREE :size
   IF :size < 5 [ STOP ]
@@ -315,6 +323,7 @@ TREE 90
 ```
 
 ### Koch Snowflake (fractal)
+![📷 Snowflake.png](Snowflake.png)
 ```logo
 TO KOCH :size :depth
   IF :depth = 0 [ FORWARD :size  STOP ]
@@ -347,7 +356,7 @@ The `examples/` directory contains 13 ready-to-run programs. Open any of them wi
 | `hilbert.logo` | Hilbert space-filling curve, depth 5 |
 | `rose_of_stars.logo` | 72 overlapping five-pointed stars, all 256 palette colours |
 | `web.logo` | Spider web — 8 spokes and 5 concentric octagonal rings |
-| `sierpinski.logo` | Sierpinski triangle, depth 4 |
+| `sierpinski.logo` | Sierpinski triangle, depth 4 ![📷 Sierpinski.png](Sierpinski.png) |
 | `rainbow_spiral.logo` | Square spiral cycling through all 256 colours twice |
 | `sunburst.logo` | 72 alternating-length rays with concentric ring overlays |
 | `mandala.logo` | Three rings of ARC-drawn petals plus a centre disc |

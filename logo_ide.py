@@ -687,6 +687,8 @@ class LogoIDE(tk.Tk):
         m.add_command(label='Save',       accelerator='Ctrl+S', command=self._cmd_save)
         m.add_command(label='Save As...',                         command=self._cmd_save_as)
         m.add_separator()
+        m.add_command(label='Save Canvas as PNG...', accelerator='Ctrl+Shift+P', command=self._cmd_save_canvas_png)
+        m.add_separator()
         m.add_command(label='Exit',                             command=self._on_close)
 
         # Edit
@@ -732,6 +734,7 @@ class LogoIDE(tk.Tk):
         self.bind('<Control-n>', lambda e: self._cmd_new())
         self.bind('<Control-o>', lambda e: self._cmd_open())
         self.bind('<Control-s>', lambda e: self._cmd_save())
+        self.bind('<Control-Shift-P>', lambda e: self._cmd_save_canvas_png())
 
     # -- Welcome / examples ---------------------------------------------------
 
@@ -930,6 +933,25 @@ REPEAT 3 [KOCH 280 4  RIGHT 120]
             self._console.write_info(f'Saved to {path}')
         except OSError as e:
             messagebox.showerror('Save failed', str(e))
+
+    def _cmd_save_canvas_png(self):
+        path = filedialog.asksaveasfilename(
+            defaultextension='.png',
+            filetypes=[('PNG image', '*.png'), ('All files', '*.*')],
+            initialdir=os.path.expanduser('~'),
+            title='Save Canvas as PNG',
+        )
+        if not path:
+            return
+        try:
+            import io
+            from PIL import Image
+            ps = self._canvas.postscript(colormode='color')
+            img = Image.open(io.BytesIO(ps.encode('latin-1')))
+            img.save(path, 'PNG')
+            self._console.write_info(f'Canvas saved to {path}')
+        except Exception as e:
+            messagebox.showerror('Save PNG failed', str(e))
 
     def _set_modified(self, val: bool):
         self._modified = val
